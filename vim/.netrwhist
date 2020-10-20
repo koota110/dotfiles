@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =4
+let g:netrw_dirhist_4='/Users/let_kohei_ota/LET/let-suite'
+let g:netrw_dirhist_3='/Users/let_kohei_ota/LET/let-suite/pages/setting/data'
+let g:netrw_dirhist_2='/Users/let_kohei_ota/LET/let-suite/pages/setting'
+let g:netrw_dirhist_1='/Users/let_kohei_ota/LET/let-suite/pages'
+let g:netrw_dirhist_0='/Users/let_kohei_ota/LET/let-suite'
+let g:netrw_dirhist_9='/Users/let_kohei_ota/LET/let-suite/pages'
+let g:netrw_dirhist_8='/Users/let_kohei_ota/LET/let-suite'
+let g:netrw_dirhist_7='/Users/let_kohei_ota/LET/let-suite/pages/users'
+let g:netrw_dirhist_6='/Users/let_kohei_ota/LET/let-suite/pages'
+let g:netrw_dirhist_5='/Users/let_kohei_ota/LET/let-suite'

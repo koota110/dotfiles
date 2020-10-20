@@ -1,0 +1,259 @@
+let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0
+argglobal
+let s:cpo_save=&cpo
+set cpo&vim
+imap <buffer> <C-L> <Plug>(emmet-expand-abbr)
+imap <buffer> <C-Y>m <Plug>(emmet-merge-lines)
+inoremap <buffer> <Plug>(emmet-merge-lines) =emmet#util#closePopup()=emmet#mergeLines()
+imap <buffer> <C-Y>A <Plug>(emmet-anchorize-summary)
+inoremap <buffer> <Plug>(emmet-anchorize-summary) =emmet#util#closePopup()=emmet#anchorizeURL(1)
+imap <buffer> <C-Y>a <Plug>(emmet-anchorize-url)
+inoremap <buffer> <Plug>(emmet-anchorize-url) =emmet#util#closePopup()=emmet#anchorizeURL(0)
+imap <buffer> <C-Y>k <Plug>(emmet-remove-tag)
+inoremap <buffer> <Plug>(emmet-remove-tag) =emmet#util#closePopup()=emmet#removeTag()
+imap <buffer> <C-Y>j <Plug>(emmet-split-join-tag)
+inoremap <buffer> <Plug>(emmet-split-join-tag) :call emmet#splitJoinTag()
+imap <buffer> <C-Y>/ <Plug>(emmet-toggle-comment)
+inoremap <buffer> <Plug>(emmet-toggle-comment) =emmet#util#closePopup()=emmet#toggleComment()
+imap <buffer> <C-Y>I <Plug>(emmet-image-encode)
+inoremap <buffer> <Plug>(emmet-image-encode) =emmet#util#closePopup()=emmet#imageEncode()
+imap <buffer> <C-Y>i <Plug>(emmet-image-size)
+inoremap <buffer> <Plug>(emmet-image-size) =emmet#util#closePopup()=emmet#imageSize()
+inoremap <buffer> <Plug>(emmet-move-prev-item) :call emmet#moveNextPrevItem(1)
+inoremap <buffer> <Plug>(emmet-move-next-item) :call emmet#moveNextPrevItem(0)
+imap <buffer> <C-Y>N <Plug>(emmet-move-prev)
+inoremap <buffer> <Plug>(emmet-move-prev) =emmet#util#closePopup()=emmet#moveNextPrev(1)
+imap <buffer> <C-Y>n <Plug>(emmet-move-next)
+inoremap <buffer> <Plug>(emmet-move-next) =emmet#util#closePopup()=emmet#moveNextPrev(0)
+imap <buffer> <C-Y>D <Plug>(emmet-balance-tag-outword)
+inoremap <buffer> <Plug>(emmet-balance-tag-outword) :call emmet#balanceTag(-1)
+imap <buffer> <C-Y>d <Plug>(emmet-balance-tag-inward)
+inoremap <buffer> <Plug>(emmet-balance-tag-inward) :call emmet#balanceTag(1)
+imap <buffer> <C-Y>u <Plug>(emmet-update-tag)
+inoremap <buffer> <Plug>(emmet-update-tag) =emmet#util#closePopup()=emmet#updateTag()
+imap <buffer> <C-Y>; <Plug>(emmet-expand-word)
+inoremap <buffer> <Plug>(emmet-expand-word) =emmet#util#closePopup()=emmet#expandAbbr(1,"")
+imap <buffer> <C-Y>, <Plug>(emmet-expand-abbr)
+inoremap <buffer> <Plug>(emmet-expand-abbr) =emmet#util#closePopup()=emmet#expandAbbr(0,"")
+vmap <buffer> c <Plug>(emmet-code-pretty)
+nmap <buffer> m <Plug>(emmet-merge-lines)
+nmap <buffer> A <Plug>(emmet-anchorize-summary)
+nmap <buffer> a <Plug>(emmet-anchorize-url)
+nmap <buffer> k <Plug>(emmet-remove-tag)
+nmap <buffer> j <Plug>(emmet-split-join-tag)
+nmap <buffer> / <Plug>(emmet-toggle-comment)
+nmap <buffer> I <Plug>(emmet-image-encode)
+nmap <buffer> i <Plug>(emmet-image-size)
+nmap <buffer> N <Plug>(emmet-move-prev)
+nmap <buffer> n <Plug>(emmet-move-next)
+vmap <buffer> D <Plug>(emmet-balance-tag-outword)
+nmap <buffer> D <Plug>(emmet-balance-tag-outword)
+vmap <buffer> d <Plug>(emmet-balance-tag-inward)
+nmap <buffer> d <Plug>(emmet-balance-tag-inward)
+nmap <buffer> u <Plug>(emmet-update-tag)
+nmap <buffer> ; <Plug>(emmet-expand-word)
+vmap <buffer> , <Plug>(emmet-expand-abbr)
+nmap <buffer> , <Plug>(emmet-expand-abbr)
+nmap <buffer>  hp <Plug>(GitGutterPreviewHunk)
+nmap <buffer>  hu <Plug>(GitGutterUndoHunk)
+nmap <buffer>  hs <Plug>(GitGutterStageHunk)
+xmap <buffer>  hs <Plug>(GitGutterStageHunk)
+nmap <buffer> [c <Plug>(GitGutterPrevHunk)
+nnoremap <buffer> <silent> [] :call search('^</\(template\|script\|style\)', 'bW')
+nnoremap <buffer> <silent> [[ :call search('^<\(template\|script\|style\)', 'bW')
+nmap <buffer> ]c <Plug>(GitGutterNextHunk)
+nnoremap <buffer> <silent> ][ :call search('^</\(template\|script\|style\)', 'W')
+nnoremap <buffer> <silent> ]] :call search('^<\(template\|script\|style\)', 'W')
+xmap <buffer> ac <Plug>(GitGutterTextObjectOuterVisual)
+omap <buffer> ac <Plug>(GitGutterTextObjectOuterPending)
+xmap <buffer> ic <Plug>(GitGutterTextObjectInnerVisual)
+omap <buffer> ic <Plug>(GitGutterTextObjectInnerPending)
+vmap <buffer> <C-Y>c <Plug>(emmet-code-pretty)
+vnoremap <buffer> <Plug>(emmet-code-pretty) :call emmet#codePretty()
+nmap <buffer> <C-Y>m <Plug>(emmet-merge-lines)
+nnoremap <buffer> <Plug>(emmet-merge-lines) :call emmet#mergeLines()
+nmap <buffer> <C-Y>A <Plug>(emmet-anchorize-summary)
+nnoremap <buffer> <Plug>(emmet-anchorize-summary) :call emmet#anchorizeURL(1)
+nmap <buffer> <C-Y>a <Plug>(emmet-anchorize-url)
+nnoremap <buffer> <Plug>(emmet-anchorize-url) :call emmet#anchorizeURL(0)
+nmap <buffer> <C-Y>k <Plug>(emmet-remove-tag)
+nnoremap <buffer> <Plug>(emmet-remove-tag) :call emmet#removeTag()
+nmap <buffer> <C-Y>j <Plug>(emmet-split-join-tag)
+nnoremap <buffer> <Plug>(emmet-split-join-tag) :call emmet#splitJoinTag()
+nmap <buffer> <C-Y>/ <Plug>(emmet-toggle-comment)
+nnoremap <buffer> <Plug>(emmet-toggle-comment) :call emmet#toggleComment()
+nmap <buffer> <C-Y>I <Plug>(emmet-image-encode)
+nnoremap <buffer> <Plug>(emmet-image-encode) :call emmet#imageEncode()
+nmap <buffer> <C-Y>i <Plug>(emmet-image-size)
+nnoremap <buffer> <Plug>(emmet-image-size) :call emmet#imageSize()
+nnoremap <buffer> <Plug>(emmet-move-prev-item) :call emmet#moveNextPrevItem(1)
+nnoremap <buffer> <Plug>(emmet-move-next-item) :call emmet#moveNextPrevItem(0)
+nmap <buffer> <C-Y>N <Plug>(emmet-move-prev)
+nnoremap <buffer> <Plug>(emmet-move-prev) :call emmet#moveNextPrev(1)
+nmap <buffer> <C-Y>n <Plug>(emmet-move-next)
+nnoremap <buffer> <Plug>(emmet-move-next) :call emmet#moveNextPrev(0)
+vmap <buffer> <C-Y>D <Plug>(emmet-balance-tag-outword)
+vnoremap <buffer> <Plug>(emmet-balance-tag-outword) :call emmet#balanceTag(-1)
+nmap <buffer> <C-Y>D <Plug>(emmet-balance-tag-outword)
+nnoremap <buffer> <Plug>(emmet-balance-tag-outword) :call emmet#balanceTag(-1)
+vmap <buffer> <C-Y>d <Plug>(emmet-balance-tag-inward)
+vnoremap <buffer> <Plug>(emmet-balance-tag-inward) :call emmet#balanceTag(1)
+nmap <buffer> <C-Y>d <Plug>(emmet-balance-tag-inward)
+nnoremap <buffer> <Plug>(emmet-balance-tag-inward) :call emmet#balanceTag(1)
+nmap <buffer> <C-Y>u <Plug>(emmet-update-tag)
+nnoremap <buffer> <Plug>(emmet-update-tag) :call emmet#updateTag()
+nmap <buffer> <C-Y>; <Plug>(emmet-expand-word)
+nnoremap <buffer> <Plug>(emmet-expand-word) :call emmet#expandAbbr(1,"")
+vmap <buffer> <C-Y>, <Plug>(emmet-expand-abbr)
+vnoremap <buffer> <Plug>(emmet-expand-abbr) :call emmet#expandAbbr(2,"")
+nmap <buffer> <C-Y>, <Plug>(emmet-expand-abbr)
+nnoremap <buffer> <Plug>(emmet-expand-abbr) :call emmet#expandAbbr(3,"")
+imap <buffer>  <Plug>(emmet-expand-abbr)
+imap <buffer> m <Plug>(emmet-merge-lines)
+imap <buffer> A <Plug>(emmet-anchorize-summary)
+imap <buffer> a <Plug>(emmet-anchorize-url)
+imap <buffer> k <Plug>(emmet-remove-tag)
+imap <buffer> j <Plug>(emmet-split-join-tag)
+imap <buffer> / <Plug>(emmet-toggle-comment)
+imap <buffer> I <Plug>(emmet-image-encode)
+imap <buffer> i <Plug>(emmet-image-size)
+imap <buffer> N <Plug>(emmet-move-prev)
+imap <buffer> n <Plug>(emmet-move-next)
+imap <buffer> D <Plug>(emmet-balance-tag-outword)
+imap <buffer> d <Plug>(emmet-balance-tag-inward)
+imap <buffer> u <Plug>(emmet-update-tag)
+imap <buffer> ; <Plug>(emmet-expand-word)
+imap <buffer> , <Plug>(emmet-expand-abbr)
+inoremap <buffer> <nowait> <silent>  =lexima#insmode#escape()
+let &cpo=s:cpo_save
+unlet s:cpo_save
+setlocal keymap=
+setlocal noarabic
+setlocal autoindent
+setlocal backupcopy=
+setlocal balloonexpr=
+setlocal nobinary
+setlocal nobreakindent
+setlocal breakindentopt=
+setlocal bufhidden=
+setlocal buflisted
+setlocal buftype=
+setlocal nocindent
+setlocal cinkeys=0{,0},0),0],:,0#,!^F,o,O,e
+setlocal cinoptions=
+setlocal cinwords=if,else,while,do,for,switch
+setlocal colorcolumn=
+setlocal comments=s:<!--,m:\ \ \ \ ,e:-->
+setlocal commentstring=<!--%s-->
+setlocal complete=.,w,b,u,t,i
+setlocal concealcursor=
+setlocal conceallevel=0
+setlocal completefunc=
+setlocal nocopyindent
+setlocal cryptmethod=
+setlocal nocursorbind
+setlocal nocursorcolumn
+setlocal cursorline
+setlocal cursorlineopt=number
+setlocal define=
+setlocal dictionary=
+setlocal nodiff
+setlocal equalprg=
+setlocal errorformat=
+setlocal expandtab
+if &filetype != 'vue'
+setlocal filetype=vue
+endif
+setlocal fixendofline
+setlocal foldcolumn=0
+setlocal foldenable
+setlocal foldexpr=0
+setlocal foldignore=#
+setlocal foldlevel=0
+setlocal foldmarker={{{,}}}
+setlocal foldmethod=manual
+setlocal foldminlines=1
+setlocal foldnestmax=20
+setlocal foldtext=foldtext()
+setlocal formatexpr=
+setlocal formatoptions=tcq
+setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
+setlocal formatprg=
+setlocal grepprg=
+setlocal iminsert=0
+setlocal imsearch=-1
+setlocal include=
+setlocal includeexpr=
+setlocal indentexpr=GetVueIndent()
+setlocal indentkeys=o,O,<Return>,<>>,{,},!^F
+setlocal noinfercase
+setlocal iskeyword=@,48-57,_,192-255,$
+setlocal keywordprg=
+setlocal nolinebreak
+setlocal nolisp
+setlocal lispwords=
+setlocal list
+setlocal makeencoding=
+setlocal makeprg=
+setlocal matchpairs=(:),{:},[:],<:>
+setlocal modeline
+setlocal modifiable
+setlocal nrformats=bin,octal,hex
+setlocal number
+setlocal numberwidth=4
+setlocal omnifunc=lsp#complete
+setlocal path=
+setlocal nopreserveindent
+setlocal nopreviewwindow
+setlocal quoteescape=\\
+setlocal noreadonly
+setlocal norelativenumber
+setlocal norightleft
+setlocal rightleftcmd=search
+setlocal noscrollbind
+setlocal scrolloff=-1
+setlocal shiftwidth=2
+setlocal noshortname
+setlocal sidescrolloff=-1
+setlocal signcolumn=auto
+setlocal nosmartindent
+setlocal softtabstop=2
+setlocal nospell
+setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
+setlocal spellfile=
+setlocal spelllang=en
+setlocal statusline=%{lightline#link()}%#LightlineLeft_active_0#%(\ %{lightline#mode()}\ %)%{(&paste)?\"|\":\"\"}%(\ %{&paste?\"PASTE\":\"\"}\ %)%#LightlineLeft_active_0_1#%#LightlineLeft_active_1#%(\ %R\ %)%{(&readonly)&&(0||FilePath()!=#\"\"||(&modified||!&modifiable))?\"|\":\"\"}%{0&&(FilePath()!=#\"\"||(&modified||!&modifiable))?\"|\":\"\"}%(\ %{FilePath()}\ %)%{FilePath()!=#\"\"&&((&modified||!&modifiable))?\"|\":\"\"}%(\ %M\ %)%#LightlineLeft_active_1_2#%#LightlineMiddle_active#%=%#LightlineRight_active_2_3#%#LightlineRight_active_2#%(\ %{&ff}\ %)%{1||1?\"|\":\"\"}%(\ %{&fenc!=#\"\"?&fenc:&enc}\ %)%{1?\"|\":\"\"}%(\ %{&ft!=#\"\"?&ft:\"no\ ft\"}\ %)%#LightlineRight_active_1_2#%#LightlineRight_active_1#%(\ %3p%%\ %)%#LightlineRight_active_0_1#%#LightlineRight_active_0#%(\ %3l:%-2v\ %)
+setlocal suffixesadd=.vue
+setlocal noswapfile
+setlocal synmaxcol=256
+if &syntax != 'vue'
+setlocal syntax=vue
+endif
+setlocal tabstop=2
+setlocal tagcase=
+setlocal tagfunc=
+setlocal tags=
+setlocal termwinkey=
+setlocal termwinscroll=10000
+setlocal termwinsize=
+setlocal textwidth=0
+setlocal thesaurus=
+setlocal undofile
+setlocal undolevels=-123456
+setlocal varsofttabstop=
+setlocal vartabstop=
+setlocal wincolor=
+setlocal nowinfixheight
+setlocal nowinfixwidth
+setlocal wrap
+setlocal wrapmargin=0
+silent! normal! zE
+let s:l = 1 - ((0 * winheight(0) + 35) / 70)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+1
+normal! 02|
+let &so = s:so_save | let &siso = s:siso_save
+doautoall SessionLoadPost
+" vim: set ft=vim :

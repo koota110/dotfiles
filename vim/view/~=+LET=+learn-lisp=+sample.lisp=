@@ -1,0 +1,211 @@
+let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0
+argglobal
+let s:cpo_save=&cpo
+set cpo&vim
+inoremap <buffer> <expr> <Del> PareditDel()
+inoremap <buffer> <expr> <C-H> PareditBackspace(0)
+inoremap <buffer> <expr> <BS> PareditBackspace(0)
+inoremap <buffer> <silent> <S-Tab> =pumvisible() ? "\<C-P>" : "\<S-Tab>"
+inoremap <buffer> <silent> <C-X>0 :call SlimvCloseForm()
+nnoremap <buffer> <silent>  :call SlimvFindDefinitions()
+nmap <buffer>  hp <Plug>(GitGutterPreviewHunk)
+nmap <buffer>  hu <Plug>(GitGutterUndoHunk)
+nmap <buffer>  hs <Plug>(GitGutterStageHunk)
+xmap <buffer>  hs <Plug>(GitGutterStageHunk)
+nnoremap <buffer> <silent>  S :call PareditSplice()|silent! call repeat#set("\ S")
+vnoremap <buffer> <silent>  W :call PareditWrapSelection("(",")")
+nnoremap <buffer> <silent>  W :call PareditWrap("(",")")|silent! call repeat#set("\ W")
+nnoremap <buffer> <silent>  J :call PareditJoin()|silent! call repeat#set("\ J")
+nnoremap <buffer> <silent>  O :call PareditSplit()|silent! call repeat#set("\ O")
+nnoremap <buffer> <silent>  > :call PareditMoveRight()|silent! call repeat#set("\ >")
+nnoremap <buffer> <silent>  < :call PareditMoveLeft()|silent! call repeat#set("\ \<")
+nnoremap <buffer> <silent>  I :call PareditRaise()|silent! call repeat#set("\ I")
+nmap <buffer> <silent>  <Down> d])%:call PareditSplice()
+nmap <buffer> <silent>  <Up> d[(:call PareditSplice()
+vnoremap <buffer> <silent>  w" :call PareditWrapSelection('"','"')
+nnoremap <buffer> <silent>  w" :call PareditWrap('"','"')|silent! call repeat#set("\ w\"")
+vnoremap <buffer> <silent>  w( :call PareditWrapSelection("(",")")
+nnoremap <buffer> <silent>  w( :call PareditWrap("(",")")|silent! call repeat#set("\ w(")
+nnoremap <buffer> <silent> % :call SlimvFindMatchingPair()
+nnoremap <buffer> <silent> ( :call PareditJumpOpening('(',')',0)
+vnoremap <buffer> <silent> ( :call PareditJumpOpening('(',')',1)
+onoremap <buffer> <silent> ( :call PareditJumpOpening('(',')',0)
+nnoremap <buffer> <silent> ) :call PareditJumpClosing('(',')',0)
+vnoremap <buffer> <silent> ) :call PareditJumpClosing('(',')',1)
+onoremap <buffer> <silent> ) :call PareditJumpClosing('(',')',0)
+nnoremap <buffer> <silent> C v$:call PareditChange(visualmode(),1)
+nnoremap <buffer> <silent> D v$:call PareditDelete(visualmode(),1)|silent! call repeat#set("D")
+nnoremap <buffer> <silent> P :call PareditPut("P")|silent! call repeat#set("P")
+nnoremap <buffer> <silent> S V:call PareditChange(visualmode(),1)
+nnoremap <buffer> <silent> X :call PareditEraseBck()|silent! call repeat#set("X")
+nmap <buffer> [c <Plug>(GitGutterPrevHunk)
+noremap <buffer> <silent> [[ :call PareditFindDefunBck()
+nmap <buffer> ]c <Plug>(GitGutterNextHunk)
+noremap <buffer> <silent> ]] :call PareditFindDefunFwd()
+xmap <buffer> ac <Plug>(GitGutterTextObjectOuterVisual)
+omap <buffer> ac <Plug>(GitGutterTextObjectOuterPending)
+nnoremap <buffer> <silent> caw :call PareditChangeSpec('caw',1)
+nnoremap <buffer> <silent> ciw :call PareditChangeSpec('ciw',1)
+nnoremap <buffer> <silent> cb :call PareditChangeSpec('cb',0)
+nnoremap <buffer> <silent> cW :set opfunc=PareditChangeg@E
+nnoremap <buffer> <silent> cw :call PareditChangeSpec('cw',1)
+nnoremap <buffer> <silent> cc :call PareditChangeLines()
+vnoremap <buffer> <silent> c :call PareditChange(visualmode(),1)
+nnoremap <buffer> <silent> c :set opfunc=PareditChangeg@
+nnoremap <buffer> <silent> dp dp
+nnoremap <buffer> <silent> do do
+nnoremap <buffer> <silent> dd :call PareditDeleteLines()|silent! call repeat#set("dd")
+vnoremap <buffer> <silent> d :call PareditDelete(visualmode(),1)
+nnoremap <buffer> <silent> d :call PareditSetDelete(v:count)g@
+xmap <buffer> ic <Plug>(GitGutterTextObjectInnerVisual)
+omap <buffer> ic <Plug>(GitGutterTextObjectInnerPending)
+nnoremap <buffer> <silent> p :call PareditPut("p")|silent! call repeat#set("p")
+nnoremap <buffer> <silent> s :call PareditEraseFwd()i
+vnoremap <buffer> <silent> x :call PareditDelete(visualmode(),1)
+nnoremap <buffer> <silent> x :call PareditEraseFwd()|silent! call repeat#set("x")
+vnoremap <buffer> <silent> <Del> :call PareditDelete(visualmode(),1)
+nnoremap <buffer> <silent> <Del> :call PareditEraseFwd()
+nnoremap <buffer> <silent> <C-]> :call SlimvFindDefinitions()
+inoremap <buffer> <expr>  PareditBackspace(0)
+inoremap <buffer> <silent> 	 =SlimvHandleTab()
+inoremap <buffer> <silent>  =pumvisible() ?  "\<C-Y>" : SlimvHandleEnter()=SlimvArglistOnEnter()
+inoremap <buffer> <silent> 0 :call SlimvCloseForm()
+inoremap <buffer> <nowait> <silent>  =lexima#insmode#escape()
+inoremap <buffer> <silent>    =SlimvArglist()
+inoremap <buffer> <expr> " PareditInsertQuotes()
+inoremap <buffer> <expr> ( PareditInsertOpening('(',')')
+inoremap <buffer> <silent> ) =PareditInsertClosing('(',')')
+let &cpo=s:cpo_save
+unlet s:cpo_save
+setlocal keymap=
+setlocal noarabic
+setlocal autoindent
+setlocal backupcopy=
+setlocal balloonexpr=
+setlocal nobinary
+setlocal nobreakindent
+setlocal breakindentopt=
+setlocal bufhidden=
+setlocal buflisted
+setlocal buftype=
+setlocal nocindent
+setlocal cinkeys=0{,0},0),0],:,0#,!^F,o,O,e
+setlocal cinoptions=
+setlocal cinwords=if,else,while,do,for,switch
+setlocal colorcolumn=
+setlocal comments=:;;;,:;;,sr:#|,mb:|,ex:|#,:;
+setlocal commentstring=;%s
+setlocal complete=.,w,b,u,t,i
+setlocal concealcursor=
+setlocal conceallevel=0
+setlocal completefunc=
+setlocal nocopyindent
+setlocal cryptmethod=
+setlocal nocursorbind
+setlocal nocursorcolumn
+setlocal cursorline
+setlocal cursorlineopt=number
+setlocal define=^\\s*(def\\k*
+setlocal dictionary=
+setlocal nodiff
+setlocal equalprg=
+setlocal errorformat=
+setlocal expandtab
+if &filetype != 'lisp'
+setlocal filetype=lisp
+endif
+setlocal fixendofline
+setlocal foldcolumn=0
+setlocal foldenable
+setlocal foldexpr=0
+setlocal foldignore=#
+setlocal foldlevel=0
+setlocal foldmarker={{{,}}}
+setlocal foldmethod=manual
+setlocal foldminlines=1
+setlocal foldnestmax=20
+setlocal foldtext=foldtext()
+setlocal formatexpr=
+setlocal formatoptions=cq
+setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
+setlocal formatprg=
+setlocal grepprg=
+setlocal iminsert=0
+setlocal imsearch=-1
+setlocal include=
+setlocal includeexpr=
+setlocal indentexpr=SlimvIndent(v:lnum)
+setlocal indentkeys=0{,0},0),0],:,0#,!^F,o,O,e
+setlocal noinfercase
+setlocal iskeyword=@,48-57,_,192-255,+,-,*,/,%,<,=,>,:,$,?,!,@-@,94,+,-,*,/,%,<,=,>,:,$,?,!,@-@,94,~,#,|,&,.,{,},[,]
+setlocal keywordprg=
+setlocal nolinebreak
+setlocal nolisp
+setlocal lispwords=
+setlocal list
+setlocal makeencoding=
+setlocal makeprg=
+setlocal matchpairs=(:),{:},[:]
+setlocal modeline
+setlocal modifiable
+setlocal nrformats=bin,octal,hex
+setlocal number
+setlocal numberwidth=4
+setlocal omnifunc=SlimvOmniComplete
+setlocal path=
+setlocal nopreserveindent
+setlocal nopreviewwindow
+setlocal quoteescape=\\
+setlocal noreadonly
+setlocal norelativenumber
+setlocal norightleft
+setlocal rightleftcmd=search
+setlocal noscrollbind
+setlocal scrolloff=-1
+setlocal shiftwidth=8
+setlocal noshortname
+setlocal showbreak=
+setlocal sidescrolloff=-1
+setlocal signcolumn=auto
+setlocal smartindent
+setlocal softtabstop=0
+setlocal nospell
+setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
+setlocal spellfile=
+setlocal spelllang=en
+setlocal statusline=%{lightline#link()}%#LightlineLeft_active_0#%(\ %{lightline#mode()}\ %)%{(&paste)?\"|\":\"\"}%(\ %{&paste?\"PASTE\":\"\"}\ %)%#LightlineLeft_active_0_1#%#LightlineLeft_active_1#%(\ %R\ %)%{(&readonly)&&(0||FilePath()!=#\"\"||(&modified||!&modifiable))?\"|\":\"\"}%{0&&(FilePath()!=#\"\"||(&modified||!&modifiable))?\"|\":\"\"}%(\ %{FilePath()}\ %)%{FilePath()!=#\"\"&&((&modified||!&modifiable))?\"|\":\"\"}%(\ %M\ %)%#LightlineLeft_active_1_2#%#LightlineMiddle_active#%=%#LightlineRight_active_2_3#%#LightlineRight_active_2#%(\ %{&ff}\ %)%{1||1?\"|\":\"\"}%(\ %{&fenc!=#\"\"?&fenc:&enc}\ %)%{1?\"|\":\"\"}%(\ %{&ft!=#\"\"?&ft:\"no\ ft\"}\ %)%#LightlineRight_active_1_2#%#LightlineRight_active_1#%(\ %3p%%\ %)%#LightlineRight_active_0_1#%#LightlineRight_active_0#%(\ %3l:%-2v\ %)
+setlocal suffixesadd=
+setlocal noswapfile
+setlocal synmaxcol=256
+if &syntax != 'lisp'
+setlocal syntax=lisp
+endif
+setlocal tabstop=8
+setlocal tagcase=
+setlocal tagfunc=
+setlocal tags=
+setlocal termwinkey=
+setlocal termwinscroll=10000
+setlocal termwinsize=
+setlocal textwidth=0
+setlocal thesaurus=
+setlocal undofile
+setlocal undolevels=-123456
+setlocal varsofttabstop=
+setlocal vartabstop=
+setlocal wincolor=
+setlocal nowinfixheight
+setlocal nowinfixwidth
+setlocal wrap
+setlocal wrapmargin=0
+silent! normal! zE
+let s:l = 3 - ((2 * winheight(0) + 36) / 73)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+3
+normal! 0
+let &so = s:so_save | let &siso = s:siso_save
+nohlsearch
+doautoall SessionLoadPost
+" vim: set ft=vim :
