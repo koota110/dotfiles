@@ -16,6 +16,9 @@ augroup folding
   au BufWritePost * if expand('%') != '' && &buftype !~ 'nofile' | mkview | endif
   au BufWinEnter * if expand('%') != '' && &buftype !~ 'nofile' | silent loadview | endif
 augroup END
+
+au BufNewFile,BufRead *.golden setf json 
+
 "
 " dein.vim settings {{{
 " install dir {{{
