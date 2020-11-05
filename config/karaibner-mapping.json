@@ -1,0 +1,99 @@
+{
+  "title": "Cursor move key binde",
+  "rules": [
+    {
+      "description": "Change Shift+Control to Command Key",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "left_control",
+            "modifiers": {
+              "mandatory": [
+                "left_shift"
+              ],
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "left_command"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "左controlを2回連打したらSafariを起動する",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "left_control"
+          },
+          "to": [
+            {
+              "shell_command": "open -a safari"
+            }
+          ],
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "left_control_key",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "left_control",
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "set_variable": {
+                "name": "left_control_key",
+                "value": 1
+              }
+            },
+            {
+              "key_code": "left_control"
+            }
+          ],
+          "to_delayed_action": {
+            "to_if_invoked": [
+              {
+                "set_variable": {
+                  "name": "left_control_key",
+                  "value": 0
+                }
+              }
+            ],
+            "to_if_canceled": [
+              {
+                "set_variable": {
+                  "name": "left_control_key",
+                  "value": 0
+                }
+              }
+            ]
+          },
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "left_control_key",
+              "value": 0
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
