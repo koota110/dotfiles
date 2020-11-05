@@ -18,6 +18,7 @@ augroup folding
 augroup END
 
 au BufNewFile,BufRead *.golden setf json 
+autocmd! VimEnter  * :mksession!
 
 "
 " dein.vim settings {{{
