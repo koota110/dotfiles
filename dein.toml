@@ -46,6 +46,12 @@ repo = 'mattn/emmet-vim'
 repo = 'tpope/vim-surround'
 
 [[plugins]]
+repo = 'tpope/vim-commentary'
+
+[[plugins]]
+repo = 'skanehira/gh.vim'
+
+[[plugins]]
 repo = 'kovisoft/slimv'
 
 # status line

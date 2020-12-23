@@ -17,10 +17,10 @@ augroup folding
   au BufWinEnter * if expand('%') != '' && &buftype !~ 'nofile' | silent loadview | endif
 augroup END
 
-au BufNewFile,BufRead *.golden setf json 
+autocmd! BufNewFile,BufRead *.golden set filetype=json
 autocmd! VimEnter  * :mksession!
+autocmd! BufWrite .vimrc execute '!cp -f ~/.vimrc ~/Kohei_Ota/tmp/dotfiles/vimrc'
 
-"
 " dein.vim settings {{{
 " install dir {{{
 let s:dein_dir = expand('~/.cache/dein')
@@ -93,6 +93,9 @@ syntax enable
 " }}}
 
 " カラースキームを使う {{{
+set background=dark
+set t_Co=256
+set termguicolors
 colorscheme iceberg
 " }}}
 
@@ -246,12 +249,19 @@ set helplang=ja
 set autowrite
 " }}}
 
+
+" gh.vim settign
+let g:gh_token='2e10aab7574a62dca98de1ffdf3d6b4808d5395c'
+
 " ファイル保存時に整形する {{{
 let s:format_targets = {
-      \ 'javascript': '--use-tabs=false --single-quote=true %',
+      \ 'javascript': '--use-tabs=false --single-quote=true --trailing-comma=none %',
+      \ 'typescript': '--use-tabs=false --single-quote=true --trailing-comma=none %',
+      \ 'yaml': '--use-tabs=false --single-quote=false --trailing-comma=none %',
       \ 'html': '--use-tabs=false --single-quote=true %',
       \ 'css': '',
       \ 'json': '--tab',
+      \ 'golden': '--tab',
       \ 'vue':  '--use-tabs=false --single-quote=true %',
       \ 'vim': '',
       \ 'java': '',
@@ -268,7 +278,7 @@ function! Format() abort
   let pos = getcurpos()
 
   " use js-beautify to format js, html, css
-  if &ft is# 'javascript' || &ft is# 'html' || &ft is# 'vue'
+  if &ft is# 'javascript' || &ft is# 'yaml' || &ft is# 'typescript' || &ft is# 'html' || &ft is# 'vue'
     if executable('prettier')
       exe '%!prettier ' .. args
     else
@@ -827,6 +837,11 @@ endfunction
 " source: [], " fzf source
 " cb: functionm "fzf callback
 " }
+"
+function! s:exec_cmd(cmd) 
+  exec a:cmd
+endfunction
+
 function! s:git_exec(opt) abort
   let current_winid = win_getid()
   if a:opt.mode is# 'term'
@@ -839,7 +854,7 @@ function! s:git_exec(opt) abort
     else
       let cmd = a:opt.window_way .. ' term ++rows=10 ' .. cmd
     endif
-    exec cmd
+    call s:exec_cmd(cmd)
     nnoremap <buffer> <silent> q :bw!<CR>
   elseif a:opt.mode is# 'pop'
     " TODO use popup window
@@ -899,6 +914,13 @@ function! s:git_checkout_cb(repo) abort
 endfunction
 
 function! s:git_checkout(...) abort
+  let fetch_opt = {
+        \ 'cmd': 'fetch',
+        \ 'auto_close': 1,
+        \ 'window_way': 'top',
+        \ 'mode': 'term',
+        \ }
+  call s:git_exec(fetch_opt)
   let source = filter(systemlist('git branch -a'), 'v:val[0] isnot# "*"')
   if empty(source)
     call s:echo_err("no other branch")
@@ -1111,6 +1133,5 @@ endfunction
 command! -nargs=* GeneratePrism call <SID>generate_prism(<f-args>)
 command! -nargs=* GeneratePrismCurrent execute 'GeneratePrism %:p:h %:t'
 nnoremap <silent>gm :GeneratePrismCurrent<CR>
-
 command! Gblame execute 'term git blame %'
-nnoremap <silent>bl :Gblame<CR>
+nnoremap <silent>gq :Gblame<CR>
