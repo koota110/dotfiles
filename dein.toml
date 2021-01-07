@@ -3,6 +3,10 @@
 repo = 'fatih/vim-go'
 on_ft = 'go'
 
+# spell check
+[[plugins]]
+repo = 'kamykn/spelunker.vim'
+
 # language server protocol
 [[plugins]]
 repo = 'prabirshrestha/vim-lsp'

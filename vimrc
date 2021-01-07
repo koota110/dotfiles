@@ -9,6 +9,13 @@
 scriptencoding utf-8
 " }}}
 
+"spell check setting
+set nospell
+let g:enable_spelunker_vim = 1
+nmap zn <Plug>(spelunker-jump-next)
+nmap zp <Plug>(spelunker-jump-prev)
+nmap zl <Plug>(spelunker-correct-from-list)
+
 "folding setting
 augroup folding
   autocmd!
@@ -251,7 +258,7 @@ set autowrite
 
 
 " gh.vim settign
-let g:gh_token='2e10aab7574a62dca98de1ffdf3d6b4808d5395c'
+let g:gh_token='897e7242de66a692735487dfd8c93077128b8987'
 
 " ファイル保存時に整形する {{{
 let s:format_targets = {
@@ -1135,3 +1142,4 @@ command! -nargs=* GeneratePrismCurrent execute 'GeneratePrism %:p:h %:t'
 nnoremap <silent>gm :GeneratePrismCurrent<CR>
 command! Gblame execute 'term git blame %'
 nnoremap <silent>gq :Gblame<CR>
+xmap gc <Plug>Commentary
