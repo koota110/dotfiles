@@ -13,6 +13,7 @@ scriptencoding utf-8
 set nospell
 let g:enable_spelunker_vim = 1
 let g:spelunker_disable_uri_checking = 1
+let g:enable_spelunker_vim_on_readonly = 1
 nmap zn <Plug>(spelunker-jump-next)
 nmap zp <Plug>(spelunker-jump-prev)
 nmap zl <Plug>(spelunker-correct-from-list)
