@@ -267,7 +267,7 @@ set autowrite
 
 
 " gh.vim settign
-let g:gh_token='897e7242de66a692735487dfd8c93077128b8987'
+let g:gh_token='xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
 
 " ファイル保存時に整形する {{{
 let s:format_targets = {
