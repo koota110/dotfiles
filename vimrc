@@ -13,10 +13,12 @@ scriptencoding utf-8
 set nospell
 let g:enable_spelunker_vim = 1
 let g:spelunker_disable_uri_checking = 1
+let g:spelunker_disable_email_checking = 1
 nmap zn <Plug>(spelunker-jump-next)
 nmap zp <Plug>(spelunker-jump-prev)
 nmap zl <Plug>(spelunker-correct-from-list)
-augroup spellchecck
+nmap zf <Plug>(spelunker-correct-feeling-lucky)
+augroup spellcheck
   autocmd!
   autocmd VimEnter,ColorScheme * highlight SpelunkerSpellBad cterm=underline ctermfg=251 gui=underline guifg=#9e9e9e
   autocmd VimEnter,ColorScheme * highlight SpelunkerComplexOrCompoundWord cterm=underline ctermfg=NONE gui=underline guifg=NONE
@@ -32,6 +34,7 @@ augroup END
 
 autocmd! BufNewFile,BufRead *.golden set filetype=json
 autocmd! VimEnter  * :mksession!
+autocmd! BufReadPost  * :mksession!
 autocmd! BufWrite .vimrc execute '!cp -f ~/.vimrc ~/Kohei_Ota/tmp/dotfiles/vimrc'
 
 " dein.vim settings {{{
@@ -435,6 +438,7 @@ nnoremap <silent> <Esc><Esc> :nohlsearch<CR>
 
 " vimrcを開く
 nnoremap <Leader>. :new ~/.vimrc<CR>
+nnoremap <Leader>l :new ~/.cache/dein/repos/github.com/Shougo/dein.vim/spell/en.utf-8.add<CR>
 nnoremap <Leader>s :source ~/.vimrc<CR>
 
 " テキストオブジェクトキーマッピング {{{
@@ -512,6 +516,10 @@ inoremap <silent> <C-e> <Esc>A
 inoremap <silent> <C-j> <Down>
 inoremap <silent> <C-k> <Up>
 inoremap <silent> <C-a> <Esc>I
+
+" lsp-mapping
+nmap <silent> <Leader>d <Plug>(lsp-document-diagnostics)
+
 " 囲う
 nnoremap <silent> gw[ cw``<Esc>P
 vnoremap <silent> gw[ c``<Esc>P
