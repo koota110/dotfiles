@@ -34,7 +34,6 @@ augroup END
 
 autocmd! BufNewFile,BufRead *.golden set filetype=json
 autocmd! VimEnter  * :mksession!
-autocmd! BufReadPost  * :mksession!
 autocmd! BufWrite .vimrc execute '!cp -f ~/.vimrc ~/Kohei_Ota/tmp/dotfiles/vimrc'
 
 " dein.vim settings {{{
@@ -267,7 +266,7 @@ set autowrite
 
 
 " gh.vim settign
-let g:gh_token='xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
+let g:gh_token='xxxxxxxxxxxxxxxxxxxxxxxxx'
 
 " ファイル保存時に整形する {{{
 let s:format_targets = {
@@ -681,7 +680,10 @@ function! s:on_lsp_buffer_enabled() abort
   let g:lsp_signs_warning = {'text': '🍌'}
   let g:lsp_signs_enabled = 1
 endfunction
-
+inoremap <silent> dn :LspNextDiagnostic<CR>
+inoremap <silent> dp :LspPreviousDiagnostic<CR>
+nnoremap <silent> dn :LspNextDiagnostic<CR>
+nnoremap <silent> dp :LspPreviousDiagnostic<CR>
 augroup lsp_install
   au!
   autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
