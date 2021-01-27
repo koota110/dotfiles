@@ -177,7 +177,7 @@ set ttyfast
 " }}}
 
 " 一行が長いファイルをsyntaxを制御することで軽くする {{{
-set synmaxcol=256
+set synmaxcol=300
 " }}}
 
 " カーソルラインを表示する {{{
@@ -266,7 +266,7 @@ set autowrite
 
 
 " gh.vim settign
-let g:gh_token='xxxxxxxxxxxxxxxxxxxxxxxxx'
+let g:gh_token='2437f1b1844bd3b42155f89e27f57b385cc854d7'
 
 " ファイル保存時に整形する {{{
 let s:format_targets = {
@@ -680,8 +680,6 @@ function! s:on_lsp_buffer_enabled() abort
   let g:lsp_signs_warning = {'text': '🍌'}
   let g:lsp_signs_enabled = 1
 endfunction
-inoremap <silent> dn :LspNextDiagnostic<CR>
-inoremap <silent> dp :LspPreviousDiagnostic<CR>
 nnoremap <silent> dn :LspNextDiagnostic<CR>
 nnoremap <silent> dp :LspPreviousDiagnostic<CR>
 augroup lsp_install
@@ -1159,3 +1157,6 @@ nnoremap <silent>gm :GeneratePrismCurrent<CR>
 command! Gblame execute 'term git blame %'
 nnoremap <silent>gq :Gblame<CR>
 xmap gc <Plug>Commentary
+
+"vueのとき頭からパースしてハイライトを行う
+autocmd FileType vue syntax sync fromstart
