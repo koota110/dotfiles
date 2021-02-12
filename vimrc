@@ -266,8 +266,7 @@ set autowrite
 
 
 " gh.vim settign
-let g:gh_token='2437f1b1844bd3b42155f89e27f57b385cc854d7'
-
+let g:gh_token='5d2be704f71099ed7d4e31d23de6204283f8e12d'
 " ファイル保存時に整形する {{{
 let s:format_targets = {
       \ 'javascript': '--use-tabs=false --single-quote=true --trailing-comma=none %',
@@ -420,10 +419,9 @@ nnoremap <Leader>w :w<CR>
 nnoremap <Leader>q :q!<CR>
 inoremap <C-y> <Esc>:w<CR>i
 inoremap <C-q> :q!<CR>
-" }}}
+"C-}
 
 " 検索
-nnoremap <C-G><C-G> :Ggrep <C-R><C-W><CR><CR>
 nnoremap <expr> gr ':Rgrep --color=auto<CR>'
 let Grep_Skip_Dirs = '.svn .git node_modules dist'  "無視するディレクトリ
 let Grep_Options = '-I -i --color=auto'   "バイナルファイルがgrepしない
@@ -1050,12 +1048,17 @@ inoremap <Down> <Nop>
 inoremap <Up> <Nop>
 inoremap <Right> <Nop>
 "github.com/jinzhu/gorm"
-nnoremap <C-o> <C-W><C-W>
+nnoremap <C-g> <C-W><C-W>
+tnoremap <C-g> <C-W><C-W>
 inoremap <C-d> <Esc>lDa
-tnoremap <C-o> <C-W><C-W>
+inoremap <silent><nowait> jj <Esc>
 "terminal setting
 function! s:bufnew()
-  " 幸いにも 'buftype' は設定されているのでそれを基準とする
+  " 幸k qgsgsgs:bufnew
+  "
+  " aaa
+  " :qgsgsgs
+  " G]:qgsgsgs
   if &buftype == "terminal" && &filetype == ""
     set filetype=terminal
   endif
@@ -1073,7 +1076,6 @@ augroup my-terminal
   autocmd FileType terminal call s:filetype()
 augroup END
 
-inoremap <C-g><C-g> <Esc>
 nnoremap t :vert term<CR>
 nnoremap <silent>cn :cn<CR>
 nnoremap <silent>cp :cN<CR>
